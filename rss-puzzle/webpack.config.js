@@ -37,7 +37,9 @@ module.exports = {
     plugins: [
         new ESLintPlugin({ extensions: 'ts' }),
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/index.html'),
+        }),
         new MiniCssExtractPlugin({
             filename: 'style.css',
         }),
