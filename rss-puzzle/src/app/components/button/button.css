@@ -1,0 +1,12 @@
+.button {
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: cyan;
+}
+.button:hover {
+  background-color: cadetblue;
+}
+
+/*# sourceMappingURL=button.css.map */

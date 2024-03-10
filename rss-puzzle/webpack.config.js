@@ -8,6 +8,11 @@ const currentLoader = process.env.NODE_ENV === 'production' ? MiniCssExtractPlug
 
 module.exports = {
     entry: path.resolve(__dirname, './src/index.ts'),
+    mode: 'development',
+    devtool: 'inline-source-map',
+    devServer: {
+        static: path.resolve(__dirname, './dist'),
+    },
     output: {
         clean: true,
         filename: 'index.js',
@@ -15,11 +20,7 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
+            { test: /\.ts$/i, use: 'ts-loader' },
             {
                 test: /\.html$/i,
                 loader: 'html-loader',
@@ -39,6 +40,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
+            filename: 'index.html',
         }),
         new MiniCssExtractPlugin({
             filename: 'style.css',

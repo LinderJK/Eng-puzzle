@@ -1,0 +1,12 @@
+.button {
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: cyan;
+
+  &:hover {
+    background-color: cadetblue;
+  }
+
+}
