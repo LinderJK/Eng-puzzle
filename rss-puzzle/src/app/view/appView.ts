@@ -1,5 +1,5 @@
 import LoginPage from '../pages/login/login';
-import GamePage from '../pages/game/game';
+// import GamePage from '../pages/game/game';
 
 export default class AppView {
     root: HTMLElement = document.querySelector('#root')!;
@@ -22,10 +22,10 @@ export default class AppView {
         this.clearPage();
         switch (name) {
             case 'login':
-                this.root.appendChild(LoginPage(this.buildPage.bind(this)));
+                this.root.append(LoginPage());
                 break;
             case 'main':
-                this.root.appendChild(GamePage());
+                // this.root.append(GamePage());
                 break;
             default:
                 break;

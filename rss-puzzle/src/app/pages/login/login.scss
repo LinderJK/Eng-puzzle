@@ -1,21 +1,19 @@
-.login-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: antiquewhite;
-
-}
-
-.login-content {
+@mixin flex-col-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  gap: 20px;
+}
 
-  &__title {
-    font-size: 5rem;
-  }
+
+.login-container {
+  @include flex-col-center;
+  background-color: antiquewhite;
+  height: 100vh;
+}
+
+.login-content {
+  @include flex-col-center;
+  gap: 20px;
 
 }

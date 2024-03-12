@@ -1,35 +1,26 @@
 import './input.scss';
+import Element from '../Component';
 
-interface InputProps {
-    labelText: string;
+interface IInputConstructor {
     className: string;
-    id: string;
-    attributes?: {
-        [key: string]: string | boolean;
-    };
+    id?: string;
+    type?: string;
+    placeholder?: string;
 }
 
-const createInput = ({ labelText, className = '', id = '', attributes }: InputProps): HTMLElement => {
-    const label = document.createElement('label');
-    label.className = 'input-label';
-    label.setAttribute('for', id);
-    const span = document.createElement('span');
-    span.textContent = labelText;
-    span.className = 'input-title';
-    const input = document.createElement('input');
-    input.className = `input input__${className}`;
-    input.setAttribute('id', id);
-    if (attributes) {
-        Object.keys(attributes).forEach((key) => {
-            const value = attributes[key];
-            if (typeof value === 'boolean') {
-                input.setAttribute(key, '');
-            } else {
-                input.setAttribute(key, value);
-            }
+class Input extends Element {
+    constructor({
+        className,
+        id = '',
+        type = '',
+        placeholder = '',
+    }: IInputConstructor) {
+        super({
+            tagName: 'input',
+            className: `input ${className}`,
+            attributes: { id, type, placeholder },
         });
     }
-    label.append(span, input);
-    return label;
-};
-export default createInput;
+}
+
+export default Input;

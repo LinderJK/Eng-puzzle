@@ -1,55 +1,47 @@
 import './login.scss';
-import createButton from '../../components/button/button';
-import elementCreator from '../../utils/elementCreator';
-import createInput from '../../components/input/input';
+import {
+    button,
+    div,
+    divText,
+    h1,
+    input,
+    span,
+} from '../../components/base-components';
+import handleButtonLogin from '../../utils/validation';
 
-const LoginPage = (callback: (name: string) => void) => {
-    const loginButton = createButton({
-        className: 'login',
-        text: 'ENTER',
-        callback: (evt) => {
-            evt.preventDefault();
-            callback('main');
-            // console.log('dsadsa123');
-            // console.log('123213');
-        },
-    });
-    const title = elementCreator({
-        tag: 'h1',
-        className: 'login-content__title',
-        textContent: 'RSS PUZZLE GAME',
-    });
+const LoginPage = () => {
+    const content = div(
+        'container-fluid login-container',
+        div(
+            'login-content',
+            h1('login-content__title', 'GO in'),
 
-    const inputFirstName = createInput({
-        labelText: 'First Name',
-        className: 'login-first-name',
-        id: 'login-first-name',
-        attributes: {
-            type: 'text',
-            required: true,
-        },
-    });
-    const inputLastName = createInput({
-        labelText: 'Last Name',
-        className: 'login-last-name',
-        id: 'login-last-name',
-        attributes: {
-            type: 'text',
-            required: true,
-        },
-    });
-    const content = elementCreator({
-        tag: 'div',
-        className: 'login-content',
-        children: [title, inputFirstName, inputLastName, loginButton],
-    });
-    const container = elementCreator({
-        tag: 'div',
-        className: 'login-container',
-        children: [content],
-    });
+            div(
+                'form mb-3 col',
+                div(
+                    'input-group',
+                    span('input-group-text', 'First Name', 'login-first-name'),
+                    input(' form-control', 'text', '', 'input-first-name')
+                ),
+                divText('form-text', '')
+            ),
 
-    return container;
+            div(
+                'form mb-3 col',
+                div(
+                    'input-group',
+                    span(
+                        'input-group-text',
+                        'Second Name',
+                        'login-second-name'
+                    ),
+                    input('form-control', 'text', '', 'input-second-name')
+                ),
+                divText('form-text', '')
+            ),
+            button('btn btn-primary btn-login', 'Login', handleButtonLogin)
+        )
+    );
+    return content.getElement();
 };
-
 export default LoginPage;
