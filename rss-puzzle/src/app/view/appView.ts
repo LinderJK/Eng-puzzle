@@ -1,12 +1,9 @@
 import LoginPage from '../pages/login/login';
-// import GamePage from '../pages/game/game';
+import StartPage from '../pages/start/start';
+import GamePage from '../pages/game/game';
 
 export default class AppView {
     root: HTMLElement = document.querySelector('#root')!;
-
-    // router: Router = new Router();
-
-    elements = [];
 
     clearPage(): void {
         if (!this.root) {
@@ -24,15 +21,18 @@ export default class AppView {
             case 'login':
                 this.root.append(LoginPage());
                 break;
-            case 'main':
-                // this.root.append(GamePage());
+            case 'game':
+                this.root.append(GamePage());
+                break;
+            case 'start':
+                this.root.append(StartPage());
                 break;
             default:
                 break;
         }
     }
 
-    // render(type: string = 'login'): void {
-    //     this.buildPage(type);
-    // }
+    static getView() {
+        return this;
+    }
 }

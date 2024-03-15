@@ -6,10 +6,12 @@ import {
     h1,
     input,
     span,
-} from '../../components/base-components';
-import handleButtonLogin from '../../utils/validation';
+} from '../../components/BaseComponents';
 
 const LoginPage = () => {
+    const handleLoginClick = () => {
+        document.dispatchEvent(new Event('loginClicked'));
+    };
     const content = div(
         'container-fluid login-container',
         div(
@@ -39,7 +41,9 @@ const LoginPage = () => {
                 ),
                 divText('form-text', '')
             ),
-            button('btn btn-primary btn-login', 'Login', handleButtonLogin)
+            button('btn btn-primary btn-login', 'Login', () =>
+                handleLoginClick()
+            )
         )
     );
     return content.getElement();
