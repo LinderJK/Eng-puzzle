@@ -6,7 +6,7 @@ type Forms = Array<{
 } | null>;
 
 class Login {
-    static currentUser: UserData = this.getUser();
+    static currentUser: UserData | null = null;
 
     static setUser(user: UserData) {
         if (Login.currentUser) {
@@ -115,6 +115,16 @@ class Login {
             return true;
         }
         console.error('no valid');
+        return false;
+    }
+
+    static logout() {
+        const user = Login.getUser();
+        if (user) {
+            localStorage.removeItem('user');
+            Login.currentUser = null;
+            return true;
+        }
         return false;
     }
 }

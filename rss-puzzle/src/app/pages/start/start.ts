@@ -2,6 +2,9 @@ import { button, div, h1 } from '../../components/BaseComponents';
 import './start.scss';
 
 const StartPage = () => {
+    const handleLogoutClick = () => {
+        document.dispatchEvent(new Event('logoutClicked'));
+    };
     const content = div(
         'container-fluid start-container',
         div(
@@ -11,9 +14,7 @@ const StartPage = () => {
             button('btn btn-primary btn-start', 'Start', () =>
                 console.log('start')
             ),
-            button('btn btn-primary btn-start', 'Logout', () =>
-                console.log('start')
-            )
+            button('btn btn-primary btn-start', 'Logout', handleLogoutClick)
         )
     );
     return content.getElement();

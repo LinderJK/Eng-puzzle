@@ -41,9 +41,7 @@ const LoginPage = () => {
                 ),
                 divText('form-text', '')
             ),
-            button('btn btn-primary btn-login', 'Login', () =>
-                handleLoginClick()
-            )
+            button('btn btn-primary btn-login', 'Login', handleLoginClick)
         )
     );
     return content.getElement();

@@ -9,16 +9,6 @@ class App {
     constructor() {
         this.view = new AppView();
         App.app = this;
-        App.appLogin();
-    }
-
-    static appLogin() {
-        document.addEventListener('loginClicked', () => {
-            const isLogin = Login.login();
-            if (isLogin) {
-                this.app.start();
-            }
-        });
     }
 
     start() {
