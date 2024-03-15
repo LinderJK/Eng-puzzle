@@ -1,6 +1,7 @@
 import LoginPage from '../pages/login/login';
 import StartPage from '../pages/start/start';
 import GamePage from '../pages/game/game';
+import Game from '../controller/Game';
 import Login from '../controller/Login';
 
 export default class AppView {
@@ -18,6 +19,15 @@ export default class AppView {
             }
         };
         document.addEventListener('logoutClicked', logoutEventListener);
+    }
+
+    startHandler() {
+        const startEventListener = () => {
+            this.buildPage('game');
+            Game.start();
+            document.removeEventListener('startClicked', startEventListener);
+        };
+        document.addEventListener('startClicked', startEventListener);
     }
 
     loginHandler() {
@@ -57,6 +67,7 @@ export default class AppView {
             case 'start':
                 this.root.append(StartPage());
                 this.logoutHandler();
+                this.startHandler();
                 break;
             default:
                 break;
