@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-cycle
+import { IComponent } from '../types/types';
+
 interface IComponentConstructor {
     tagName?: keyof HTMLElementTagNameMap | string;
     className: string;
@@ -5,13 +8,13 @@ interface IComponentConstructor {
     attributes?: {
         [key: string]: string;
     };
-    children?: Component[];
+    children?: IComponent;
 }
 
 class Component {
     element: HTMLElement;
 
-    children: Component[] = [];
+    children: IComponent[] = [];
 
     constructor(
         {
@@ -20,7 +23,7 @@ class Component {
             textContent = '',
             attributes = {},
         }: IComponentConstructor,
-        ...children: Component[]
+        ...children: IComponent[]
     ) {
         const element = document.createElement(tagName);
         element.className = className;
@@ -33,6 +36,10 @@ class Component {
         if (children) {
             this.appendChildren(children);
         }
+    }
+
+    setTextContent(textContent: string): void {
+        this.element.textContent = textContent;
     }
 
     setAttributes(attributes: { [x: string]: string | boolean }) {
@@ -48,11 +55,11 @@ class Component {
         }
     }
 
-    private appendChildren(childrenArr: Component[]) {
-        childrenArr.forEach((element: Component) => this.append(element));
+    appendChildren(childrenArr: IComponent[]) {
+        childrenArr.forEach((element: IComponent) => this.append(element));
     }
 
-    append(element: Component) {
+    append(element: IComponent) {
         this.children.push(element);
         this.element?.append(element.getElement());
     }
@@ -82,6 +89,26 @@ class Component {
             child.delete();
         });
         this.children.length = 0;
+    }
+
+    deleteChild(child: IComponent) {
+        const index = this.children.indexOf(child);
+        if (index !== -1) {
+            this.children.splice(index, 1);
+            child.element.remove();
+        }
+    }
+
+    getAllChildrenMap(): Map<string, IComponent> {
+        const allChildrenMap: Map<string, IComponent> = new Map();
+
+        const setChildren = (element: IComponent) => {
+            const key = element.element.className.split(' ')[0];
+            allChildrenMap.set(key, element);
+            element.children.forEach((child: IComponent) => setChildren(child));
+        };
+        this.children.forEach((child) => setChildren(child));
+        return allChildrenMap;
     }
 
     delete() {

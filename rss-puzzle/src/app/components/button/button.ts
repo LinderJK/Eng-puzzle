@@ -1,19 +1,19 @@
 import './button.scss';
-import Element from '../Component';
+import Component from '../Component';
 
-export interface IButtonConstructor {
+interface IButtonConstructor {
     className: string;
     textContent: string;
     clickHandler?: ((evt: Event) => void) | undefined;
 }
 
-class Button extends Element {
+class Button extends Component {
     private readonly clickHandler: (evt: Event) => void;
 
     constructor({ className, textContent, clickHandler }: IButtonConstructor) {
         super({
             tagName: 'button',
-            className: `button ${className}`,
+            className: `${className} button`,
             textContent,
         });
         this.clickHandler = clickHandler ?? (() => {});

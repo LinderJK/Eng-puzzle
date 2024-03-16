@@ -1,7 +1,7 @@
 import LoginPage from '../pages/login/login';
 import StartPage from '../pages/start/start';
 import GamePage from '../pages/game/game';
-import Game from '../controller/Game';
+import Game from '../game/Game';
 import Login from '../controller/Login';
 
 export default class AppView {
@@ -24,7 +24,6 @@ export default class AppView {
     startHandler() {
         const startEventListener = () => {
             this.buildPage('game');
-            Game.start();
             document.removeEventListener('startClicked', startEventListener);
         };
         document.addEventListener('startClicked', startEventListener);
@@ -54,6 +53,14 @@ export default class AppView {
         }
     }
 
+    startGameView() {
+        const gamePageObj = GamePage();
+        const gamePageElement = gamePageObj.element as Node;
+        const gamePageContent = gamePageObj.content;
+        this.root.append(gamePageElement);
+        Game.start(gamePageContent);
+    }
+
     public buildPage(name: string = 'login'): void {
         this.clearPage();
         switch (name) {
@@ -62,7 +69,7 @@ export default class AppView {
                 this.loginHandler();
                 break;
             case 'game':
-                this.root.append(GamePage());
+                this.startGameView();
                 break;
             case 'start':
                 this.root.append(StartPage());

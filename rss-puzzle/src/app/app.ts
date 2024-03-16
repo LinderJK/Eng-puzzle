@@ -1,5 +1,6 @@
 import AppView from './view/appView';
 import Login from './controller/Login';
+import Game from './game/Game';
 
 class App {
     public view: AppView;
@@ -13,8 +14,16 @@ class App {
 
     start() {
         const isLogin = Login.getUser();
+
+        const isPlaying = Game.getPlayingStatus();
+        console.log('TEST', isPlaying);
         if (isLogin) {
-            this.view.buildPage('start');
+            if (isPlaying) {
+                this.view.buildPage('game');
+                // Game.start();
+            } else {
+                this.view.buildPage('start');
+            }
         } else {
             this.view.buildPage('login');
         }

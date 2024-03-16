@@ -1,0 +1,39 @@
+.game-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-field {
+  min-width: 500px;
+  min-height: 500px;
+  background-color: #cdcbda;
+
+}
+
+.level-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+
+}
+
+.card {
+
+  & p {
+    margin: 0;
+    padding: 10px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #0dcaf0;
+  }
+}
+
+.card-list {
+  display: flex;
+  flex-direction: row;
+
+}

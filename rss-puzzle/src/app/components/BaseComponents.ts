@@ -1,9 +1,9 @@
 import Button from './button/button';
-import type { HandlerFn } from '../types/types';
+import type { HandlerFn, IComponent } from '../types/types';
 import Component from './Component';
 import Input from './input/input';
 
-export const div = (className: string, ...children: Component[]) =>
+export const div = (className: string, ...children: IComponent[]) =>
     new Component(
         {
             tagName: 'div',
@@ -50,6 +50,15 @@ export const span = (className: string, textContent: string, id = '') =>
         textContent,
         attributes: { id },
     });
+
+export const nav = (className: string, ...children: IComponent[]) =>
+    new Component(
+        {
+            tagName: 'nav',
+            className,
+        },
+        ...children
+    );
 
 export const input = (
     className: string,
