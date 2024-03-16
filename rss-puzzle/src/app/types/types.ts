@@ -8,6 +8,8 @@ export interface IComponent {
 
     getElement(): HTMLElement;
 
+    getChildren(): IComponent[];
+
     delete(): void;
 
     deleteChildren(): void;
@@ -17,6 +19,10 @@ export interface IComponent {
     setAttributes(attributes: { [x: string]: string | boolean }): void;
 
     append(element: IComponent): void;
+
+    removeAttribute(attribute: string): void;
+
+    getTextContent(): string;
 
     getAllChildrenMap(): Map<string, IComponent>;
 
@@ -37,7 +43,9 @@ export interface IComponent {
     setTextContent(textContent: string): void;
 }
 
-export interface Word {
+export type PageMap = Map<string, IComponent | undefined> | undefined;
+
+export interface IWord {
     audioExample: string;
     id: number;
     textExample: string;
@@ -46,9 +54,9 @@ export interface Word {
     wordTranslate: string;
 }
 
-export interface LevelData {
+export interface ILevelData {
     levelData: LevelInfo;
-    words: Word[];
+    words: IWord[];
 }
 
 export type LevelInfo = {
@@ -60,12 +68,7 @@ export type LevelInfo = {
     year: string;
 };
 
-export interface RoundData {
-    rounds: LevelData[];
+export interface IRoundData {
+    rounds: ILevelData[];
     roundsCount: number;
 }
-
-export type Div = {
-    className: string;
-    children?: IComponent[];
-};

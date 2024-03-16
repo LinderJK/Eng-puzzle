@@ -42,6 +42,18 @@ class Component {
         this.element.textContent = textContent;
     }
 
+    getTextContent(): string {
+        if (this.element.textContent) {
+            return this.element.textContent;
+        }
+        console.error('no text content');
+        return '';
+    }
+
+    removeAttribute(attribute: string): void {
+        this.element.removeAttribute(attribute);
+    }
+
     setAttributes(attributes: { [x: string]: string | boolean }) {
         if (attributes && this.element) {
             Object.keys(attributes).forEach((key) => {
@@ -109,6 +121,10 @@ class Component {
         };
         this.children.forEach((child) => setChildren(child));
         return allChildrenMap;
+    }
+
+    getChildren() {
+        return this.children;
     }
 
     delete() {
