@@ -22,9 +22,6 @@ class Game {
             Game.nextRound();
         });
         Game.getPageMap(page);
-        console.log(Game.pageContentMap);
-
-        Game.configPageContent();
         Game.getWords().then(() => {
             Game.round = new Round(
                 Game.data.rounds[Game.roundNumber],
@@ -46,12 +43,10 @@ class Game {
     }
 
     static nextRound() {
-        console.log(Game.data.roundsCount);
         if (
             Game.level === 6 &&
             Game.roundNumber === Game.data.roundsCount - 1
         ) {
-            console.log('GAME FINISH');
             Game.gameEnd();
         } else if (Game.roundNumber === Game.data.roundsCount - 1) {
             Game.roundNumber = 0;
@@ -78,23 +73,26 @@ class Game {
         }
     }
 
-    static configPageContent() {
-        Game.getElem('game-title')!.setTextContent('RSS-PUZZLE GAME');
-        // Game.getElem('btn-data')!.addListener('click', () => {
-        //     console.log('work data clicked');
-        // });
-        // Game.getElem('btn-next-round')!.addListener('click', () => {
-        //     Game.nextWord();
-        // });
-    }
+    // static configPageContent() {
+    //     Game.getElem('game-title')!.setTextContent('RSS-PUZZLE GAME');
+    //     Game.getElem('game-user-panel__user')!.setTextContent(
+    //         'RSS-PUZZLE GAME'
+    //     );
+    //     // Game.getElem('btn-data')!.addListener('click', () => {
+    //     //     console.log('work data clicked');
+    //     // });
+    //     // Game.getElem('btn-next-round')!.addListener('click', () => {
+    //     //     Game.nextWord();
+    //     // });
+    // }
 
-    static nextWord() {
-        this.roundNumber += 1;
-        Game.round = new Round(
-            Game.data.rounds[Game.roundNumber],
-            Game.getElem('game-deck')!
-        );
-    }
+    // static nextWord() {
+    //     this.roundNumber += 1;
+    //     Game.round = new Round(
+    //         Game.data.rounds[Game.roundNumber],
+    //         Game.getElem('game-deck')!
+    //     );
+    // }
 
     static getElem(name: string): PageComponent {
         const component = Game.pageContentMap?.get(name);
@@ -110,13 +108,12 @@ class Game {
 
     static async getWords() {
         try {
-            // console.log('words loaded');
             const response = await fetch(
                 `https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data//main/data/wordCollectionLevel${Game.level}.json`
             );
             const data = await response.json();
             Game.data = data;
-            console.log('all game data', data);
+            console.log('All game data', data);
         } catch (err) {
             console.error(err);
         }

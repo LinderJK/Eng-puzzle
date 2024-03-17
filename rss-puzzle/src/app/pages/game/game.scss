@@ -8,9 +8,25 @@
 }
 
 .game-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px 0 20px;
   color: white;
   min-height: 80px;
   background: #efbd63 linear-gradient(135deg, #977c5e, #efbd63, #3c2907);
   margin-bottom: 20px;
 
+}
+
+.game-user-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+
+  p {
+    margin: 0;
+    font-weight: bold;
+  }
 }

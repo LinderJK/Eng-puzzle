@@ -41,6 +41,6 @@ const LoginPage = () => {
             button('btn btn-primary btn-login', 'Login', handleLoginClick)
         )
     );
-    return content.getElement();
+    return { element: content.getElement(), map: content.getAllChildrenMap() };
 };
 export default LoginPage;

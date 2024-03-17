@@ -9,7 +9,9 @@ export default class AppView {
 
     startPageObj = StartPage();
 
-    loginPage = LoginPage();
+    loginPageObj = LoginPage();
+
+    gamePageObj = GamePage();
 
     logoutHandler() {
         const logoutEventListener = () => {
@@ -58,26 +60,25 @@ export default class AppView {
     }
 
     startGameView() {
-        const gamePageObj = GamePage();
-        const gamePageElement = gamePageObj.element as Node;
-        const gamePageContent = gamePageObj.content;
-        console.log(gamePageContent, 'Это контент');
+        const gamePageElement = this.gamePageObj.element;
+        const gamePageContent = this.gamePageObj.content;
         this.root.append(gamePageElement);
         Game.start(gamePageContent);
     }
 
     public buildPage(name: string = 'login'): void {
         this.clearPage();
+        this.updatePages();
         switch (name) {
             case 'login':
-                this.root.append(this.loginPage);
+                this.root.append(this.loginPageObj.element);
                 this.loginHandler();
                 break;
             case 'game':
                 this.startGameView();
+                this.logoutHandler();
                 break;
             case 'start':
-                // this.updateStartPage();
                 this.root.append(this.startPageObj.element);
                 this.logoutHandler();
                 this.startHandler();
@@ -87,19 +88,17 @@ export default class AppView {
         }
     }
 
-    // updateStartPage() {
-    //     const pageMap = this.startPageObj.map;
-    //     console.log(pageMap);
-    //     const user = Login.getUser();
-    //     console.log(user);
-    //     const firstName = user[0]['input-first-name'];
-    //     const secondName = user[1]['input-second-name'];
-    //
-    //     const userText = pageMap.get('start-content__username');
-    //     userText?.setTextContent(`${firstName} ${secondName}`);
-    // }
-
-    // static getView() {
-    //     return this;
-    // }
+    updatePages() {
+        const startPageMap = this.startPageObj.map;
+        const gamePageMap = this.gamePageObj.map;
+        const user = Login.getUser();
+        if (user) {
+            const firstName = user[0]['input-first-name'];
+            const secondName = user[1]['input-second-name'];
+            const userTextLogin = startPageMap.get('start-content__username');
+            userTextLogin?.setTextContent(`${firstName} ${secondName}`);
+            const userTextGame = gamePageMap.get('game-user-panel__user');
+            userTextGame?.setTextContent(`${firstName} ${secondName}`);
+        }
+    }
 }
