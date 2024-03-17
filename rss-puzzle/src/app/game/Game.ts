@@ -5,7 +5,7 @@ import { div, h1 } from '../components/BaseComponents';
 type PageComponent = IComponent | undefined;
 
 class Game {
-    static isPlaying: boolean = true;
+    static isPlaying: boolean = false;
 
     static pageContentMap: PageMap;
 
@@ -21,9 +21,7 @@ class Game {
         document.addEventListener('levelComplete', () => {
             Game.nextRound();
         });
-
         Game.getPageMap(page);
-
         console.log(Game.pageContentMap);
 
         Game.configPageContent();

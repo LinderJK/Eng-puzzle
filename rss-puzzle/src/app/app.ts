@@ -20,7 +20,6 @@ class App {
         if (isLogin) {
             if (isPlaying) {
                 this.view.buildPage('game');
-                // Game.start();
             } else {
                 this.view.buildPage('start');
             }

@@ -1,3 +1,35 @@
+.start-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+  height: 100vh;
+}
 
+.start-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  max-width: 500px;
+}
+.start-content__username {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #977c5e;
+}
+.start-content__description {
+  text-align: justify;
+}
+.start-content .start-content__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
 
 /*# sourceMappingURL=start.css.map */

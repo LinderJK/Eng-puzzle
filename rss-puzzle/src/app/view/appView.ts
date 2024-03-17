@@ -7,6 +7,10 @@ import Login from '../controller/Login';
 export default class AppView {
     root: HTMLElement = document.querySelector('#root')!;
 
+    startPageObj = StartPage();
+
+    loginPage = LoginPage();
+
     logoutHandler() {
         const logoutEventListener = () => {
             const logout = Login.logout();
@@ -57,6 +61,7 @@ export default class AppView {
         const gamePageObj = GamePage();
         const gamePageElement = gamePageObj.element as Node;
         const gamePageContent = gamePageObj.content;
+        console.log(gamePageContent, 'Это контент');
         this.root.append(gamePageElement);
         Game.start(gamePageContent);
     }
@@ -65,14 +70,15 @@ export default class AppView {
         this.clearPage();
         switch (name) {
             case 'login':
-                this.root.append(LoginPage());
+                this.root.append(this.loginPage);
                 this.loginHandler();
                 break;
             case 'game':
                 this.startGameView();
                 break;
             case 'start':
-                this.root.append(StartPage());
+                // this.updateStartPage();
+                this.root.append(this.startPageObj.element);
                 this.logoutHandler();
                 this.startHandler();
                 break;
@@ -81,7 +87,19 @@ export default class AppView {
         }
     }
 
-    static getView() {
-        return this;
-    }
+    // updateStartPage() {
+    //     const pageMap = this.startPageObj.map;
+    //     console.log(pageMap);
+    //     const user = Login.getUser();
+    //     console.log(user);
+    //     const firstName = user[0]['input-first-name'];
+    //     const secondName = user[1]['input-second-name'];
+    //
+    //     const userText = pageMap.get('start-content__username');
+    //     userText?.setTextContent(`${firstName} ${secondName}`);
+    // }
+
+    // static getView() {
+    //     return this;
+    // }
 }

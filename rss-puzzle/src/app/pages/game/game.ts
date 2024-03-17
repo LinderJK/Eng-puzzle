@@ -3,13 +3,13 @@ import { div, h1, nav } from '../../components/BaseComponents';
 
 const GamePage = () => {
     const content = div(
-        'container-fluid game-container',
+        'container-fluid game-container p-0',
 
         div(
             'game-content',
-            h1('game-title start-content__title', 'Game'),
             nav(
-                'game-nav navbar navbar-expand-lg bg-body-tertiary'
+                'game-nav navbar navbar-expand-lg bg-body-tertiary',
+                h1('game-title start-content__title', 'Game')
 
                 // div(
                 //     'btn-group',

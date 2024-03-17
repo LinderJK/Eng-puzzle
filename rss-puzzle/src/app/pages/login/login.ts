@@ -16,10 +16,11 @@ const LoginPage = () => {
         'container-fluid login-container',
         div(
             'login-content',
-            h1('login-content__title', 'GO in'),
+            h1('login-content__title', 'Welcome to RSS PUZZLE'),
+            span('login-content__description', 'Please login'),
 
             div(
-                'form mb-3 col',
+                'form  mb-3 align-items-center',
                 div(
                     'input-group',
                     span('input-group-text', 'First Name', 'login-first-name'),
@@ -29,14 +30,10 @@ const LoginPage = () => {
             ),
 
             div(
-                'form mb-3 col',
+                'form mb-3 align-items-center',
                 div(
-                    'input-group',
-                    span(
-                        'input-group-text',
-                        'Second Name',
-                        'login-second-name'
-                    ),
+                    'input-group col-8',
+                    span('input-group-text', 'Surname', 'login-second-name'),
                     input('form-control', 'text', '', 'input-second-name')
                 ),
                 divText('form-text', '')

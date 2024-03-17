@@ -1,0 +1,35 @@
+@mixin flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-container {
+  @include flex-col-center;
+  background-color: antiquewhite;
+  height: 100vh;
+}
+
+.start-content {
+  @include flex-col-center;
+  gap: 20px;
+  max-width: 500px;
+
+  &__username {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #977c5e;
+
+  }
+
+  &__description {
+    text-align: justify;
+  }
+
+  .start-content__button {
+    @include flex-col-center;
+    flex-direction: row;
+    gap: 20px;
+  }
+}

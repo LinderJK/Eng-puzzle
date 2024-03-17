@@ -4,42 +4,76 @@
   align-items: center;
 }
 
+.level-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .level-field {
-  min-width: 500px;
-  min-height: 500px;
-  background-color: #cdcbda;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  height: 500px;
+  background-color: #e3cdaf;
+  border-radius: 15px;
+  border: 1px solid #3c2907;
+  padding: 5px;
+  gap: 5px;
 
 }
 
 .level-cards {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 10px;
   margin: 10px;
+
 }
 
 .card {
-  & p {
+  display: flex;
+  align-items: center;
+  min-width: 50px;
+  transition: all 0.2s;
+  border: 1px solid #3c2907;
+  background-color: #e3cdaf;
+
+  p {
     margin: 0;
-    padding: 10px;
+    padding: 5px;
+    white-space: nowrap;
+
   }
 
   &:hover {
     cursor: pointer;
-    background-color: #0dcaf0;
+    background-color: #efbd63;
   }
 }
 
 .card-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 2px;
+  flex-grow: 0;
 
+  .card {
+    transition: all 0.2s;
+    background-color: white;
 
+    &:hover {
+      background-color: #efbd63;
+    }
+
+  }
 }
 
 .game-control-first {
   display: flex;
-  margin: 50px;
+  margin: 30px;
 }
 
 
