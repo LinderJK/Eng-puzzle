@@ -26,10 +26,6 @@ class Button extends Component {
         }
         super.delete();
     }
-
-    getHandler() {
-        return this.clickHandler;
-    }
 }
 
 export default Button;

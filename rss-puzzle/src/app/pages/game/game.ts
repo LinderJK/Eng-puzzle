@@ -23,27 +23,8 @@ const GamePage = () => {
                         handleLogoutClick
                     )
                 )
-                // div(
-                //     'btn-group',
-                //
-                //     button(
-                //         'btn-data btn btn-outline-success',
-                //         'GetData',
-                //         () => {}
-                //     ),
-                //     button('btn-play btn btn-outline-success', 'Play', () => {})
-                // )
             ),
             div('game-deck')
-
-            // div(
-            //     'game-control',
-            //     button(
-            //         'btn-next-round btn btn-outline-success',
-            //         'NextRound',
-            //         () => {}
-            //     )
-            // )
         )
     );
     return {

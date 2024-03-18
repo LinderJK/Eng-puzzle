@@ -8,8 +8,6 @@ export interface IComponent {
 
     getElement(): HTMLElement;
 
-    getChildren(): IComponent[];
-
     delete(): void;
 
     deleteChildren(): void;

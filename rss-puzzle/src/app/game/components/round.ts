@@ -58,12 +58,6 @@ class Round {
         // Set the singleton instance.
         Round.round = this;
         this.pageContentMap = this.gameField.getAllChildrenMap();
-        // console.log(' levelData', this.levelData);
-        // console.log('levelWords ', this.levelWords);
-        // console.log(' levelInfo', this.levelInfo);
-        // console.log(' currentWord', this.currentWord);
-        // console.log('wordCards', this.wordCards);
-        // console.log(' MAP', this.pageContentMap);
     }
 
     /**
@@ -123,8 +117,8 @@ class Round {
      */
     checkCard() {
         const result = this.resultCardText.join(' ');
-        console.log('TEST!111', this.currentWord.textExample);
-        console.log('TEST222', result);
+        console.log('word', this.currentWord.textExample);
+        console.log('result', result);
         if (this.currentWord.textExample === result) {
             this.pageContentMap!.get('btn-next-game')?.removeAttribute(
                 'disabled'
@@ -197,7 +191,6 @@ class Round {
         this.resultCardText.length = 0;
         const list: IComponent = div('card-list');
         const wordsArray: string[] = Round.splitWord(this.currentWord);
-        console.log(this.currentWord, 'CURRENT WORD', wordsArray);
         wordsArray.forEach((word) => {
             const card: IComponent = div('card', p('card__text', word));
             const clickHandler = () => this.moveCard(card, list);
@@ -305,32 +298,7 @@ class Round {
         this.gameField.deleteChildren();
 
         this.gameField.append(page);
-        console.log(this.gameField.getChildren());
     }
-
-    // viewCard() {
-    //     const card = div('card', p('card-text', '211312'));
-    //     return card;
-    // }
-
-    // eslint-disable-next-line class-methods-use-this
-    // createWordsArr(words: Word[]): string[][] {
-    //     return words.map((word) => {
-    //         return word.textExample.split(' ');
-    //     });
-    // }
-
-    // createLevel() {
-    //     // this.level = new Level();
-    // }
-
-    // createRoundField() {
-    //     const field = div('round');
-    // }
-
-    // wordSplit(text: string): string[] {
-    //     return text.split(' ');
-    // }
 }
 
 export default Round;

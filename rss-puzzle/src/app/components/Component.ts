@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { IComponent } from '../types/types';
 
 interface IComponentConstructor {
@@ -11,7 +10,7 @@ interface IComponentConstructor {
     children?: IComponent;
 }
 
-class Component {
+class Component implements IComponent {
     element: HTMLElement;
 
     children: IComponent[] = [];
@@ -121,10 +120,6 @@ class Component {
         };
         this.children.forEach((child) => setChildren(child));
         return allChildrenMap;
-    }
-
-    getChildren() {
-        return this.children;
     }
 
     delete() {

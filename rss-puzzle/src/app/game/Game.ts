@@ -5,18 +5,23 @@ import { div, h1 } from '../components/BaseComponents';
 type PageComponent = IComponent | undefined;
 
 class Game {
-    static isPlaying: boolean = false;
+    static isPlaying: boolean = false; // Indicates whether the game is currently being played.
 
-    static pageContentMap: PageMap;
+    static pageContentMap: PageMap; // The map of page content.
 
-    static round: Round;
+    static round: Round; // The current round object.
 
-    static data: IRoundData;
+    static data: IRoundData; // The data for the current round.
 
-    static roundNumber: number = 0;
+    static roundNumber: number = 0; // The number of the current round.
 
-    static level: number = 1;
+    static level: number = 1; // The level of the game.
 
+    /**
+     * Starts the game.
+     * @param {PageComponent} page The component representing the game page.
+     * @static
+     */
     static start(page: PageComponent): void {
         document.addEventListener('levelComplete', () => {
             Game.nextRound();
@@ -30,6 +35,10 @@ class Game {
         });
     }
 
+    /**
+     * Ends the game.
+     * @static
+     */
     static gameEnd() {
         const field = Game.getElem('game-deck');
         if (field) {
@@ -42,6 +51,10 @@ class Game {
         }
     }
 
+    /**
+     * Moves to the next round of the game.
+     * @static
+     */
     static nextRound() {
         if (
             Game.level === 6 &&
@@ -65,6 +78,11 @@ class Game {
         }
     }
 
+    /**
+     * Retrieves the page map.
+     * @param {PageComponent} page The page.
+     * @static
+     */
     static getPageMap(page: PageComponent) {
         if (page) {
             Game.pageContentMap = page.getAllChildrenMap();
@@ -73,27 +91,12 @@ class Game {
         }
     }
 
-    // static configPageContent() {
-    //     Game.getElem('game-title')!.setTextContent('RSS-PUZZLE GAME');
-    //     Game.getElem('game-user-panel__user')!.setTextContent(
-    //         'RSS-PUZZLE GAME'
-    //     );
-    //     // Game.getElem('btn-data')!.addListener('click', () => {
-    //     //     console.log('work data clicked');
-    //     // });
-    //     // Game.getElem('btn-next-round')!.addListener('click', () => {
-    //     //     Game.nextWord();
-    //     // });
-    // }
-
-    // static nextWord() {
-    //     this.roundNumber += 1;
-    //     Game.round = new Round(
-    //         Game.data.rounds[Game.roundNumber],
-    //         Game.getElem('game-deck')!
-    //     );
-    // }
-
+    /**
+     * Retrieves a component from the page content map.
+     * @param {string} name The name of the component to retrieve.
+     * @returns {PageComponent} The retrieved component.
+     * @static
+     */
     static getElem(name: string): PageComponent {
         const component = Game.pageContentMap?.get(name);
         if (!component) {
@@ -102,10 +105,20 @@ class Game {
         return component;
     }
 
+    /**
+     * Retrieves the playing status of the game.
+     * @returns {boolean} True if the game is being played, false otherwise.
+     * @static
+     */
     static getPlayingStatus() {
         return Game.isPlaying;
     }
 
+    /**
+     * Retrieves the words for the current level of the game.
+     * @returns {Promise<void>} A promise that resolves when the words are retrieved.
+     * @static
+     */
     static async getWords() {
         try {
             const response = await fetch(

@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   width: 700px;
-  height: 500px;
+  min-height: 500px;
   background-color: #e3cdaf;
   border-radius: 15px;
   border: 1px solid #3c2907;
@@ -39,6 +39,7 @@
   transition: all 0.2s;
   border: 1px solid #3c2907;
   background-color: #e3cdaf;
+  padding: 10px;
 
   p {
     margin: 0;

@@ -72,17 +72,3 @@ export const input = (
         type,
         placeholder,
     });
-
-// export const form = (
-//     className: string,
-//     attributes: Record<string, string>,
-//     ...children: Component[]
-// ) =>
-//     new Component({
-//         tagName: 'form',
-//         className,
-//         attributes: {
-//             ...attributes,
-//         },
-//         ...children,
-//     });
