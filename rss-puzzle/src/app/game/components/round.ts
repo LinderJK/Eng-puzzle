@@ -8,8 +8,6 @@ import {
 import { button, div, h1, p } from '../../components/BaseComponents';
 import './round.scss';
 
-// import button from '../../components/button/button';
-
 class Round {
     levelData: ILevelData; // The data for the current level.
 
@@ -33,6 +31,8 @@ class Round {
     wordCards: { card: IComponent; clickHandler?: () => void }[] = [];
 
     currentLevel: number = 0; // The current level number.
+
+    maxLevels: number = 9; // The maximum number of levels
 
     resultCardText: string[] = []; // User-collected text.
 
@@ -117,15 +117,10 @@ class Round {
      */
     checkCard() {
         const result = this.resultCardText.join(' ');
-        console.log('word', this.currentWord.textExample);
-        console.log('result', result);
         if (this.currentWord.textExample === result) {
             this.pageContentMap!.get('btn-next-game')?.removeAttribute(
                 'disabled'
             );
-            console.log('DONE');
-        } else {
-            console.log('NONE');
         }
     }
 
@@ -149,7 +144,7 @@ class Round {
     levelUpdate() {
         this.cardContainer.deleteChildren();
         this.currentLevel += 1;
-        if (this.currentLevel >= 9) {
+        if (this.currentLevel >= this.maxLevels) {
             const event = new CustomEvent('levelComplete');
             document.dispatchEvent(event);
         } else {
@@ -204,19 +199,16 @@ class Round {
     }
 
     /**
-     * Card transfer Handler
-     * @param {card: IComponent} - The card to transfer
-     * @param {list:IComponent} - List where cards are transferred
-     * The list is added to the levelContainer playfield
-     * @see{moveBack} Rewrites the handler moveBack
-     * @returns {void}
-     * */
+     * Moves a card from one list to another.
+     * Update click handler for the moved card
+     * @param {IComponent} card - The card to be moved.
+     * @param {IComponent} list - The list to which the card will be moved.
+     */
     moveCard(card: IComponent, list: IComponent) {
         this.cardContainer.deleteChild(card);
         list.append(card);
         this.addWord(card);
         this.levelContainer.append(list);
-        // TODO! move to method
         const item = this.wordCards.find((elem) => elem.card === card);
         if (item && item.clickHandler) {
             card.removeListener('click', item.clickHandler);
@@ -227,18 +219,16 @@ class Round {
     }
 
     /**
-     * Card back transfer Handler
-     * @param {card: IComponent} - The card to transfer
-     * @param {list:IComponent} - List where cards are transferred
-     * The list is added to the levelContainer playfield
-     * @see{moveCard} Rewrites the handler moveCard
-     * @returns {void}
-     * */
+     * Moves a card back to the original container from a list.
+     * Update click handler for the moved card
+     * @param {IComponent} card - The card to be moved back.
+     * @param {IComponent} list - The list from which the card will be moved back.
+     *
+     */
     moveBack(card: IComponent, list: IComponent) {
         this.levelContainer.deleteChild(card);
         this.removeWord(card);
         this.cardContainer.append(card);
-        // TODO! move to method
         const item = this.wordCards.find((elem) => elem.card === card);
         if (item && item.clickHandler) {
             card.removeListener('click', item.clickHandler);
@@ -248,9 +238,8 @@ class Round {
     }
 
     /**
-     * Remove a word to the array containing the current sentence assembly
-     * @used-by moveBack
-     * @param card - Current pressed card
+     * Removes a word associated with the given card from the resultCardText array.
+     * @param {IComponent} card - The card whose associated word will be removed.
      */
     removeWord(card: IComponent) {
         if (this.resultCardText.includes(card.getTextContent())) {
@@ -263,14 +252,16 @@ class Round {
 
     /**
      * Adds a word to the array containing the current sentence assembly
-     * @used-by moveCard
-     * @param card - Current pressed card
+     * @param {IComponent} card - Current pressed card
      */
     addWord(card: IComponent) {
         this.resultCardText.push(card.getTextContent());
     }
 
-    // TODO can delete this methods
+    /**
+     * Draws round information on the game field.
+     * This includes displaying the current word's translated example sentence.
+     */
     drawRoundInfo() {
         const page = div(
             'round-info',
@@ -284,6 +275,10 @@ class Round {
         this.gameField.append(page);
     }
 
+    /**
+     * Draws level information on the game field.
+     * This includes displaying the level name and a transition sentence.
+     */
     drawLevelInfo() {
         const page = div(
             'level-info',
@@ -296,7 +291,6 @@ class Round {
         );
 
         this.gameField.deleteChildren();
-
         this.gameField.append(page);
     }
 }

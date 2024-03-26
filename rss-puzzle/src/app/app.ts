@@ -15,7 +15,6 @@ class App {
     start() {
         const isLogin = Login.getUser();
         const isPlaying = Game.getPlayingStatus();
-        console.log('TEST', isPlaying);
         if (isLogin) {
             if (isPlaying) {
                 this.view.buildPage('game');

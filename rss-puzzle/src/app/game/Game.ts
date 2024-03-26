@@ -124,9 +124,7 @@ class Game {
             const response = await fetch(
                 `https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data//main/data/wordCollectionLevel${Game.level}.json`
             );
-            const data = await response.json();
-            Game.data = data;
-            console.log('All game data', data);
+            Game.data = await response.json();
         } catch (err) {
             console.error(err);
         }
